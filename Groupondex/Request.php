@@ -79,11 +79,11 @@ class Request
             $ts = time();
         }
 
-        return [
+        return array(
             'api_id' => $this->getApiId(),
             'signature' => md5($this->getApiId() . '_' . $this->getApiToken() . '_' . $ts),
             'timestamp' => $ts,
-        ];
+        );
     }
 
     /**
@@ -92,7 +92,7 @@ class Request
      * @return array
      * @throws Exception
      */
-    private function send($action, array $params = []) {
+    private function send($action, array $params = array()) {
         if (!$curl = curl_init()) {
             throw new Exception('No curl connection');
         }

@@ -81,18 +81,18 @@ class Encoder
      * @return mixed
      */
     private static function transliterate($string) {
-        static $cyr = [
+        static $cyr = array(
             'А','Б','В','Г','Д','Е','Ё','Ж','З','И','Й','К','Л','М','Н','О','П','Р','С','Т','У','Ф',
             'Х','Ц','Ч','Ш','Щ','Ы','Э','Ю','Я','Ь','Ъ','а','б','в','г','д','е','ё','ж','з','и','й','к',
             'л','м','н','о','п','р','с','т','у','ф','х','ц','ч','ш','щ','ы','э','ю','я','ь','ъ','№'
-        ];
+        );
         
-        static $translit = [
+        static $translit = array(
             'A','B','V','G','D','E','Yo','Zh','Z','I','J','K','L','M','N','O','P','R','S','T','U',
             'F','Kh','Ts','Ch','Sh','Sch','Y','E','Yu','Ya','','','a','b','v','g','d','e','yo',
             'zh','z','i','j','k','l','m','n','o','p','r','s','t','u','f','kh','ts','ch','sh','sch',
             'y','e','yu','ya','','','#'
-        ];
+        );
         
         return str_replace($cyr, $translit, $string);
     }
