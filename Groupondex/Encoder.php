@@ -25,6 +25,11 @@ class Encoder
      */
     private $dom;
 
+    /**
+     * @var \DOMElement $offers
+     */
+    private $offers;
+
     public function __construct() {
         $imp = new \DOMImplementation();
         $dtd = $imp->createDocumentType('yml_catalog', '', 'shops.dtd');
@@ -36,25 +41,34 @@ class Encoder
         $root->setAttribute('date', date('Y-m-d H:i'));
 
         $shop = $dom->createElement('shop');
-        $shopName = $dom->createElement('name', self::SHOP_NAME);
-        $shop->appendChild($shopName);
-        $shopUrl = $dom->createElement('url', self::SHOP_URL);
-        $shop->appendChild($shopUrl);
-
+        
+        // ShopName
+        $shop
+            ->appendChild($dom->createElement('name'))
+            ->appendChild($dom->createTextNode(self::SHOP_NAME));
+        
+        // ShopUrl
+        $shop
+            ->appendChild($dom->createElement('url'))
+            ->appendChild($dom->createTextNode(self::SHOP_URL));
+        
+        // Offers
         $offers = $dom->createElement('offers');
         $shop->appendChild($offers);
 
         $root->appendChild($shop);
         $dom->appendChild($root);
 
-        $this->setDom($dom);
+        $this
+            ->setDom($dom)
+            ->setOffers($offers);
     }
 
     /**
      * @param \DOMDocument $dom
      * @return $this
      */
-    private function setDom($dom)
+    private function setDom(\DOMDocument $dom)
     {
         $this->dom = $dom;
 
@@ -70,10 +84,22 @@ class Encoder
     }
 
     /**
-     * @return \DOMNode
+     * @param \DOMElement $offers
+     * @return $this
      */
-    private function getOffersElement() {
-        return $this->getDom()->getElementsByTagName('offers')->item(0);
+    private function setOffers(\DOMElement $offers)
+    {
+        $this->offers = $offers;
+
+        return $this;
+    }
+
+    /**
+     * @return \DOMElement
+     */
+    private function getOffers()
+    {
+        return $this->offers;
     }
 
     /**
@@ -113,7 +139,7 @@ class Encoder
     /**
      * @param array $offer
      * @param string $cityPostfix
-     * @return \DOMNode|bool
+     * @return \DOMElement|bool
      */
     public function addOffer(array $offer, $cityPostfix) {
         $deal = $offer['deal'];
@@ -124,7 +150,7 @@ class Encoder
         }
         
         $dom = $this->getDom();
-        $offersEl = $this->getOffersElement();
+        $offersEl = $this->getOffers();
         
         $option = $deal['options'][0];
 
@@ -175,14 +201,14 @@ class Encoder
     /**
      * @param array $offers
      * @param string $cityPostfix
-     * @return \DOMNode
+     * @return \DOMElement
      */
     public function addOffers(array $offers, $cityPostfix) {
         foreach ($offers as $offer) {
             $this->addOffer($offer, $cityPostfix);
         }
 
-        return $this->getOffersElement();
+        return $this->getOffers();
     }
 
     /**
