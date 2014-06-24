@@ -144,7 +144,7 @@ class Encoder
     public function addOffer(array $offer, $cityPostfix) {
         $deal = $offer['deal'];
         
-        // Если нет опций или нет картинок - исключаем оффер из выгрузки
+        // Excluding offers with empty options or images
         if (empty($deal['options']) || empty($deal['images'])) {
             return false;
         }
@@ -186,7 +186,8 @@ class Encoder
         // Name
         $offerEl
             ->appendChild($dom->createElement('name'))
-            ->appendChild($dom->createTextNode($deal['title']));
+            //->appendChild($dom->createTextNode($deal['title']));
+            ->appendChild($dom->createTextNode(self::offerName2Text($deal['delivery_title'])));
 
         // Description
         $offerEl
@@ -196,6 +197,28 @@ class Encoder
         $offersEl->appendChild($offerEl);
         
         return $offersEl;
+    }
+
+    /**
+     * @param $html
+     * @return string
+     */
+    private static function offerName2Text($html) {
+        // Awesome logic... :(
+        
+        // Cut <b> element with contents
+        $text = preg_replace('/<b>([\s\S]*?)<\/b>/', '', $html);
+        
+        // Strip remaining tags
+        $text = strip_tags($text);
+        
+        // Process htmlentities back to text
+        $text = html_entity_decode($text, ENT_QUOTES | ENT_XHTML, 'UTF-8');
+        
+        // Trim remaining spaces
+        $text = trim($text);
+        
+        return $text;
     }
 
     /**
