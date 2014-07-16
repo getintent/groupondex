@@ -155,7 +155,7 @@ class Encoder
         $option = $deal['options'][0];
 
         $offerEl = $dom->createElement('offer');
-        $offerEl->setAttribute('id', $offer['id']);
+        $offerEl->setAttribute('id', $offer['global_id']);
         $offerEl->setAttribute('available', 'true');
         
         // URL
