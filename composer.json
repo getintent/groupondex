@@ -1,0 +1,22 @@
+{
+  "name": "getintent/groupondex",
+  "description": "Groupon XML (YML) generation library",
+  "authors": [
+    {
+      "name": "Viktor Kulikov",
+      "email": "bezdoom@gmail.com"
+    },
+    {
+      "name": "Viktor Kulikov",
+      "email": "bezdoom@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-0": {
+      "Groupondex\\": "src/"
+    }
+  },
+  "require": {
+    "php": ">=5.4.0"
+  }
+}

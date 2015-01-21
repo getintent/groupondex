@@ -2,11 +2,9 @@
 
 namespace Groupondex;
 
-require_once('Exception.php');
-
 /**
  * Requests to Groupon API
- * 
+ *
  * @package Groupondex
  * @author Ivan Kornoukhov
  */
@@ -31,7 +29,8 @@ class Request
      * @param int $apiId
      * @param string $apiToken
      */
-    public function __construct($apiId, $apiToken) {
+    public function __construct($apiId, $apiToken)
+    {
         $this
             ->setApiId($apiId)
             ->setApiToken($apiToken);
@@ -41,7 +40,8 @@ class Request
      * @param int $apiId
      * @return $this
      */
-    private function setApiId($apiId) {
+    private function setApiId($apiId)
+    {
         $this->apiId = $apiId;
         return $this;
     }
@@ -49,7 +49,8 @@ class Request
     /**
      * @return int
      */
-    private function getApiId() {
+    private function getApiId()
+    {
         return $this->apiId;
     }
 
@@ -57,7 +58,8 @@ class Request
      * @param string $apiToken
      * @return $this
      */
-    private function setApiToken($apiToken) {
+    private function setApiToken($apiToken)
+    {
         $this->apiToken = $apiToken;
         return $this;
     }
@@ -74,7 +76,8 @@ class Request
      * @param int|null $ts
      * @return array
      */
-    private function getRequiredRequestParams($ts = null) {
+    private function getRequiredRequestParams($ts = null)
+    {
         if (is_null($ts)) {
             $ts = time();
         }
@@ -92,7 +95,8 @@ class Request
      * @return array
      * @throws Exception
      */
-    private function send($action, array $params = array()) {
+    private function send($action, array $params = array())
+    {
         if (!$curl = curl_init()) {
             throw new Exception('No curl connection');
         }
@@ -120,7 +124,8 @@ class Request
      * @return array
      * @throws Exception
      */
-    public function getAllCities() {
+    public function getAllCities()
+    {
         $response = $this->send('cities.json');
 
         return $response['cities'];
@@ -135,7 +140,8 @@ class Request
      * @return array
      * @throws Exception
      */
-    public function getCity($id) {
+    public function getCity($id)
+    {
         $id = (int)$id;
         $response = $this->send("cities/{$id}.json");
 
@@ -151,7 +157,8 @@ class Request
      * @return array
      * @throws Exception
      */
-    public function getOffersByCity($cityId) {
+    public function getOffersByCity($cityId)
+    {
         $cityId = (int)$cityId;
         $response = $this->send("/cities/{$cityId}/offers.json");
 
@@ -167,7 +174,8 @@ class Request
      * @return array
      * @throws Exception
      */
-    public function getOffer($id) {
+    public function getOffer($id)
+    {
         $id = (int)$id;
         $response = $this->send("offers/{$id}.json");
 

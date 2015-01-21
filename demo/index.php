@@ -6,8 +6,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 
-require_once('Groupondex/Request.php');
-require_once('Groupondex/Encoder.php');
+require_once('../vendor/autoload.php');
 
 /** Идентификатор API у групона */
 const GROUPON_API_ID = 0;

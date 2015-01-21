@@ -6,8 +6,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 
-require_once('Groupondex/Request.php');
-require_once('Groupondex/Encoder.php');
+require_once('../vendor/autoload.php');
 
 /** Путь к папке, куда буду сохраняться фиды (если используется вариант с сохранением на сервере) */
 const XML_SAVE_PATH = '/tmp/';
