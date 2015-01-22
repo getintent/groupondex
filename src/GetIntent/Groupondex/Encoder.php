@@ -1,6 +1,6 @@
 <?php
 
-namespace Groupondex;
+namespace GetIntent\Groupondex;
 
 /**
  * Encoder of Groupon API structures to kind of YML format

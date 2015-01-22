@@ -1,6 +1,6 @@
 <?php
 
-namespace Groupondex;
+namespace GetIntent\Groupondex;
 
 /**
  * Requests to Groupon API
