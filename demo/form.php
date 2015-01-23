@@ -25,14 +25,14 @@ const EXPORT_TO_CLIENT = false;
 
 try {
     // Объект запроса к Groupon API
-    $request = new Groupondex\Request(GROUPON_API_ID, GROUPON_API_TOKEN);
+    $request = new GetIntent\Groupondex\Request(GROUPON_API_ID, GROUPON_API_TOKEN);
 
     $selCities = array();
 
     // Если нам отправили форму и всё правильно
     if (isset($_POST['cities']) && is_array($_POST['cities']) && !empty($_POST['cities'])) {
         // Объект перевода PHP-шных массивов со структурой групон-апи в нечто yml-подобное
-        $encoder = new Groupondex\Encoder();
+        $encoder = new GetIntent\Groupondex\Encoder();
         $selCities = $_POST['cities'];
 
         foreach ($selCities as $cityId) {
@@ -65,7 +65,7 @@ try {
 
     // Выгребаем все города для формы
     $allCities = $request->getAllCities();
-} catch (Groupondex\Exception $e) {
+} catch (GetIntent\Groupondex\Exception $e) {
    die($e->getMessage());
 }
 

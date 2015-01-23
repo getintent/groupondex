@@ -24,9 +24,9 @@ if (
 
 try {
     // Объект запроса к Groupon API
-    $request = new Groupondex\Request(GROUPON_API_ID, GROUPON_API_TOKEN);
+    $request = new GetIntent\Groupondex\Request(GROUPON_API_ID, GROUPON_API_TOKEN);
     // Объект перевода PHP-шных массивов со структурой групон-апи в нечто yml-подобное
-    $encoder = new Groupondex\Encoder();
+    $encoder = new GetIntent\Groupondex\Encoder();
     
     foreach ($cities as $cityId) {
         $cityId = (int)$cityId;
@@ -42,6 +42,6 @@ try {
 
     header('Content-Type: application/xml;charset=utf-8');
     die($encoder->getFeed());
-} catch (Groupondex\Exception $e) {
+} catch (GetIntent\Groupondex\Exception $e) {
    die($e->getMessage());
 }
